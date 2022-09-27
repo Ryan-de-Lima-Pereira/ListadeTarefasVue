@@ -99,7 +99,7 @@
                     <div class="tile is-child box">
                         <p class="title">Concluido</p>
                         <div class="block">
-                            <div class="is-size-5 is-flex is-flex-direction-row is-justify-content-space-between" v-for="tarefa, index in tarefasDone" :key="index">
+                            <div class="is-size-5 Donecontainer" v-for="tarefa, index in tarefasDone" :key="index">
                                     <label class="checkbox">
                                         <input type="checkbox" checked
                                         @change="changeList(tarefa.titulo,index, tarefa.done)">
@@ -118,5 +118,9 @@
 </template>
 
 <style>
-
+.Donecontainer{
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between; 
+}
 </style>
