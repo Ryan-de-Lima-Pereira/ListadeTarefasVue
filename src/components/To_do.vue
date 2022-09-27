@@ -13,16 +13,18 @@
         },
         methods:{
             addTo_do(){
-                //console.log('tá funcionando')
-                // Adicionando ao To_do
-                let tarefa = {
+                // Verificação
+                if(this.tarefaInput.length >= 1){
+                    // Adicionando ao To_do
+                    let tarefa = {
                     titulo: this.tarefaInput,
                     id: this.tarefasTo_do.length + 1,
                     done: false
                 }
-                this.tarefasTo_do.push(tarefa)
-                //Limpando o input
-                this.tarefaInput = ''
+                    this.tarefasTo_do.push(tarefa)
+                    //Limpando o input
+                    this.tarefaInput = ''
+                }
             },
             changeList(titulo,index,done){
                 // Verificar se está no estado fazendo ou não
@@ -51,6 +53,9 @@
                     this.tarefasDone.splice(index, 1)
                 }
                 
+            },
+            deleteDone(index){
+                this.tarefasDone.splice(index, 1)
             }
         }
     }
@@ -84,7 +89,6 @@
                                     <label class="checkbox is-size-5">
                                         <input type="checkbox" @change="changeList(tarefa.titulo,index, tarefa.done)">
                                         {{ tarefa.titulo }}
-                                        {{ tarefa.id }}
                                     </label>
                                 </li>
                             </ul>
@@ -95,13 +99,13 @@
                     <div class="tile is-child box">
                         <p class="title">Concluido</p>
                         <div class="block">
-                            <div class="is-size-5" v-for="tarefa, index in tarefasDone" :key="index">
-                                <label class="checkbox">
-                                    <input type="checkbox" checked
-                                    @change="changeList(tarefa.titulo,index, tarefa.done)"> 
-                                    <s> {{ tarefa.titulo }} </s>
-                                    {{ tarefa.id }}
-                                </label>
+                            <div class="is-size-5 is-flex is-flex-direction-row is-justify-content-space-between" v-for="tarefa, index in tarefasDone" :key="index">
+                                    <label class="checkbox">
+                                        <input type="checkbox" checked
+                                        @change="changeList(tarefa.titulo,index, tarefa.done)">
+                                        <s> {{ tarefa.titulo }} </s>
+                                    </label>
+                                    <button class="delete" @click="deleteDone(index)"></button>
                             </div>
                         </div>
                     </div>
